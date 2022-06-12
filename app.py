@@ -15,6 +15,28 @@ def find_coordinate(address_name):
 
 
 
+# Creating a function to load coordinates from an excel file
+def find_bulk_coordinates():
+    arc = ArcGIS()
+    file_name = input("What is the path of the file? -- :  ")
+    sheet_no = int(input("How many sheets are in the workbook? -- :  "))
+    worksheet = int(input("which sheet number had the locations to find the coordinates? -- :  "))
+    if 
+    df = pd.read
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 address = input("What is the location? -- :  ")
 
