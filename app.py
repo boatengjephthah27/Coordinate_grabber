@@ -24,7 +24,7 @@ def find_bulk_coordinates():
     file_name = input("What is the path of the file? -- :  ")
     sheet_no = int(input("How many sheets are in the workbook? -- :  "))
     ps_name = input("What name have you stored the polling station names column? -- :  ")
-    region = input("Which region are you dealing with? -- :  ")
+    # region = input("Which region are you dealing with? -- :  ")
     constituency = input("How have you stored the constituency column? -- :  ")
 
     # Putting up the conditions
@@ -38,14 +38,38 @@ def find_bulk_coordinates():
         print("Workbook empty, Provide worksheet to work on!")
         quit()
 
-    df["address"] = df[ps_name] + df[region] + df[constituency]
-    location = df["address"].apply(arc.geocode)
+    print(df)
+
+    df["address"] = df[ps_name] + " " + df[constituency]
+    df["location"] = df["address"].apply(arc.geocode)
     df["Latitude"] = df["location"].apply(lambda x : x.latitude if x != None else None)
     df["Longitude"] = df["location"].apply(lambda x : x.longitude if x != None else None)
     
     df.to_excel("trial_test_done.xlsx", sheet_name="code test")
 
-    
+
+
+
+
+# The opening Message for user to make a choice on what they want to do
+
+user_choice = input("""
+Do you want to check for a single location or upload an excel file? :  
+1. Single location
+2. Upload an Excel file
+
+--- :   """)
+
+
+if user_choice == "1":
+    address = input("What is the location? -- :  ")
+    print(find_coordinate(address))
+
+elif user_choice == "2":
+    find_bulk_coordinates()
+
+else:
+    print("Option not part of the given, Try again!")
 
 
 
@@ -54,15 +78,3 @@ def find_bulk_coordinates():
 
 
 
-
-
-
-
-
-
-
-
-address = input("What is the location? -- :  ")
-
-
-print(find_coordinate(address))
