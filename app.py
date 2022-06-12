@@ -38,7 +38,14 @@ def find_bulk_coordinates():
         print("Workbook empty, Provide worksheet to work on!")
         quit()
 
-    address = df[ps_name] + df[region] + df[constituency]
+    df["address"] = df[ps_name] + df[region] + df[constituency]
+    location = df["address"].apply(arc.geocode)
+    df["Latitude"] = df["location"].apply(lambda x : x.latitude if x != None else None)
+    df["Longitude"] = df["location"].apply(lambda x : x.longitude if x != None else None)
+    
+    df.to_excel("trial_test_done.xlsx", sheet_name="code test")
+
+    
 
 
 
