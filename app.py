@@ -1,5 +1,7 @@
 import pandas as pd  
 from geopy.geocoders import ArcGIS
+import graphics 
+
 
 
 # Creating a function to load just a single coordinate
@@ -7,7 +9,7 @@ from geopy.geocoders import ArcGIS
 def find_coordinate(address_name):
     arc = ArcGIS()
     location = arc.geocode(address_name)
-    print(location)
+    print("\n" + str(location) + "\n")
     latitude = location.latitude
     longitude = location.longitude
     return f"Latitude : {latitude}\nLongitude : {longitude}\n"
