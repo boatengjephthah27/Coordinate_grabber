@@ -3,7 +3,9 @@ from geopy.geocoders import ArcGIS
 import graphics 
 import os, sys
 
+# printing the logo
 
+print(graphics.logo)
 # Creating a function to load just a single coordinate
 
 def find_coordinate(address_name):
