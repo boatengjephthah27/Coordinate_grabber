@@ -1,11 +1,18 @@
 import pandas as pd  
 from geopy.geocoders import ArcGIS
 import graphics 
-import os, sys
+import os, sys, time as t
 
 # printing the logo
 
-print(graphics.logo)
+logo = graphics.logo
+for columns in logo:
+    print(columns, end='')
+    t.sleep(0.001)
+
+
+
+
 # Creating a function to load just a single coordinate
 
 def find_coordinate(address_name):
