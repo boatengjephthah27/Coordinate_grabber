@@ -11,7 +11,6 @@ for columns in logo:
     t.sleep(0.003)
 
 
-
 # Creating a function to load just a single coordinate
 
 def find_coordinate(address_name):
@@ -27,17 +26,22 @@ def find_coordinate(address_name):
 def find_bulk_coordinates():
     arc = ArcGIS()
 
-    # Gathering the necessary info for operation
-
+    # Opening and reading the file
     file_name = input("What is the path of the file? -- :  ")
+    with pd.read_excel(file_name, sheet_name=0) as df:
+        if not os.path.exists(file_name):
+            print("File does not exist!")
+
+
+    # Gathering the necessary info for operation
+    
     sheet_no = int(input("How many sheets are in the workbook? -- :  "))
     ps_name = input("What name have you stored the polling station names column? -- :  ")
     # region = input("Which region are you dealing with? -- :  ")
-    constituency = input("How have you stored the constituency column? -- :  ")
+    district = input("How have you stored the district column? -- :  ")
 
     # Putting up the conditions
 
-    # checking if file exists
     if not os.path.exists:
         print("File does not exist!")
 
@@ -52,7 +56,7 @@ def find_bulk_coordinates():
 
     print(df)
 
-    df["address"] = df[ps_name] + " " + df[constituency]
+    df["address"] = df[ps_name] + " " + df[district]
     df["location"] = df["address"].apply(arc.geocode)
     df["Latitude"] = df["location"].apply(lambda x : x.latitude if x != None else None)
     df["Longitude"] = df["location"].apply(lambda x : x.longitude if x != None else None)
