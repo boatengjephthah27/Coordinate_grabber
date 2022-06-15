@@ -8,8 +8,7 @@ import os, sys, time as t
 logo = graphics.logo
 for columns in logo:
     print(columns, end='')
-    t.sleep(0.001)
-
+    t.sleep(0.003)
 
 
 
@@ -37,6 +36,10 @@ def find_bulk_coordinates():
     constituency = input("How have you stored the constituency column? -- :  ")
 
     # Putting up the conditions
+
+    # checking if file exists
+    if not os.path.exists:
+        print("File does not exist!")
 
     if sheet_no == 1:
         df = pd.read_excel(file_name, sheet_name=0)
