@@ -15,8 +15,6 @@ def find_coordinate(address_name):
     return f"Latitude : {latitude}\nLongitude : {longitude}\n"
 
 
-
-
 # Creating a function to load coordinates from an excel file
 def find_bulk_coordinates():
     arc = ArcGIS()
