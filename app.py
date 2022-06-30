@@ -13,13 +13,24 @@ for columns in logo:
 
 # Creating a function to load just a single coordinate
 
-def find_coordinate(address_name):
+def find_coordinate():
+    address = input("What is the location? -- :  ")
     arc = ArcGIS()
-    location = arc.geocode(address_name)
-    print("\n" + str(location) + "\n")
-    latitude = location.latitude
-    longitude = location.longitude
-    return f"\nLatitude : {latitude}\nLongitude : {longitude}\n"
+    location = arc.geocode(address)
+    loc = "\nThis is the most closest location to your input \nIs this the right location?\n\n" + str(location) + "\n\nYes / No --:  "
+    yn = input().lower()
+    for columns in loc:
+        print(columns, end="")
+        t.sleep(0.7)
+    if yn == "yes":
+        latitude = location.latitude
+        longitude = location.longitude
+        return f"\nLatitude : {latitude}\nLongitude : {longitude}\n"
+    elif yn == "no":
+        find_coordinate()
+    else:
+        print("Wrong choice!\nTry Again!")
+    
 
 
 # Creating a function to load coordinates from an excel file
@@ -31,11 +42,18 @@ def find_bulk_coordinates():
 
     # Checking if file exists or not
     if not os.path.exists(file_name):
-        print("File does not exist!")
+        print("\nFile does not exist! \nCheck file path well!\n\n")
 
     else:
         # Opening and reading the file
-        with pd.read_excel(file_name, sheet_name=0) as df:
+        # with pd.read_excel(file_name, sheet_name=0) as df:
+
+            # Gathering the necessary info for operation
+            sheet_no = int(input("How many sheets are in the workbook? -- :  "))
+            ps_name = input("What name have you stored the polling station names column? -- :  ")
+            region = input("Which region are you dealing with? -- :  ")
+            district = input("How have you stored the district column? -- :  ")
+
 
             # Giving a view of the file
             view = "Giving you a view of the file......\n\n"
@@ -45,11 +63,6 @@ def find_bulk_coordinates():
 
             print(df[:5])
 
-            # Gathering the necessary info for operation
-            sheet_no = int(input("How many sheets are in the workbook? -- :  "))
-            ps_name = input("What name have you stored the polling station names column? -- :  ")
-            region = input("Which region are you dealing with? -- :  ")
-            district = input("How have you stored the district column? -- :  ")
 
             # Putting up the conditions
 
@@ -89,8 +102,7 @@ Do you want to check for a single location or upload an excel file? :
 
 while True:
     if user_choice == "1":
-        address = input("What is the location? -- :  ")
-        print(find_coordinate(address))
+        print(find_coordinate())
         break
 
     elif user_choice == "2":
