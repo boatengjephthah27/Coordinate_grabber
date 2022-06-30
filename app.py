@@ -34,7 +34,16 @@ def find_bulk_coordinates():
         print("File does not exist!")
 
     else:
+        # Opening and reading the file
         with pd.read_excel(file_name, sheet_name=0) as df:
+
+            # Giving a view of the file
+            view = "Giving you a view of the file......\n\n"
+            for columns in view:
+                print(columns, end="")
+                t.sleep(0.7)
+
+            print(df[:5])
 
             # Gathering the necessary info for operation
             sheet_no = int(input("How many sheets are in the workbook? -- :  "))
@@ -49,7 +58,8 @@ def find_bulk_coordinates():
             elif sheet_no > 1:
                 worksheet = int(input("which sheet number has the locations to find the coordinates? -- :  "))
                 df = pd.read_excel(file_name, sheet_name=worksheet-1)
-            elif
+            elif not int:
+                print("Invalid input. \nInput must be an integer!")
             else:
                 print("Workbook empty, Provide worksheet to work on!")
                 quit()
