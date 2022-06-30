@@ -19,7 +19,7 @@ def find_coordinate(address_name):
     print("\n" + str(location) + "\n")
     latitude = location.latitude
     longitude = location.longitude
-    return f"Latitude : {latitude}\nLongitude : {longitude}\n"
+    return f"\nLatitude : {latitude}\nLongitude : {longitude}\n"
 
 
 # Creating a function to load coordinates from an excel file
@@ -29,7 +29,7 @@ def find_bulk_coordinates():
     # Opening and reading the file
     file_name = input("What is the path of the file? -- :  ")
     with pd.read_excel(file_name, sheet_name=0) as df:
-        if not os.path.exists(file_name):
+        if not os.path.exists(df):
             print("File does not exist!")
 
 
@@ -41,9 +41,6 @@ def find_bulk_coordinates():
     district = input("How have you stored the district column? -- :  ")
 
     # Putting up the conditions
-
-    if not os.path.exists:
-        print("File does not exist!")
 
     if sheet_no == 1:
         df = pd.read_excel(file_name, sheet_name=0)
@@ -77,16 +74,19 @@ Do you want to check for a single location or upload an excel file? :
 --- :   """)
 
 
-if user_choice == "1":
-    address = input("What is the location? -- :  ")
-    print(find_coordinate(address))
+while True:
+    if user_choice == "1":
+        address = input("What is the location? -- :  ")
+        print(find_coordinate(address))
+        break
 
-elif user_choice == "2":
-    find_bulk_coordinates()
+    elif user_choice == "2":
+        find_bulk_coordinates()
+        break
 
-else:
-    print("Option not part of the given, Try again!")
-
+    else:
+        print("Option not part of the given, Try again!")
+        continue
 
 
 
