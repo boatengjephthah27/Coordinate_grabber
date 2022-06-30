@@ -26,39 +26,42 @@ def find_coordinate(address_name):
 def find_bulk_coordinates():
     arc = ArcGIS()
 
-    # Opening and reading the file
+    # Getting the file name
     file_name = input("What is the path of the file? -- :  ")
-    with pd.read_excel(file_name, sheet_name=0) as df:
-        if not os.path.exists(df):
-            print("File does not exist!")
 
+    # Checking if file exists or not
+    if not os.path.exists(file_name):
+        print("File does not exist!")
 
-    # Gathering the necessary info for operation
-    
-    sheet_no = int(input("How many sheets are in the workbook? -- :  "))
-    ps_name = input("What name have you stored the polling station names column? -- :  ")
-    # region = input("Which region are you dealing with? -- :  ")
-    district = input("How have you stored the district column? -- :  ")
-
-    # Putting up the conditions
-
-    if sheet_no == 1:
-        df = pd.read_excel(file_name, sheet_name=0)
-    elif sheet_no > 1:
-        worksheet = int(input("which sheet number has the locations to find the coordinates? -- :  "))
-        df = pd.read_excel(file_name, sheet_name=worksheet-1)
     else:
-        print("Workbook empty, Provide worksheet to work on!")
-        quit()
+        with pd.read_excel(file_name, sheet_name=0) as df:
 
-    print(df)
+            # Gathering the necessary info for operation
+            sheet_no = int(input("How many sheets are in the workbook? -- :  "))
+            ps_name = input("What name have you stored the polling station names column? -- :  ")
+            region = input("Which region are you dealing with? -- :  ")
+            district = input("How have you stored the district column? -- :  ")
 
-    df["address"] = df[ps_name] + " " + df[district]
-    df["location"] = df["address"].apply(arc.geocode)
-    df["Latitude"] = df["location"].apply(lambda x : x.latitude if x != None else None)
-    df["Longitude"] = df["location"].apply(lambda x : x.longitude if x != None else None)
-    
-    df.to_excel("trial_test_done.xlsx", sheet_name="code test")
+            # Putting up the conditions
+
+            if sheet_no == 1:
+                df = pd.read_excel(file_name, sheet_name=0)
+            elif sheet_no > 1:
+                worksheet = int(input("which sheet number has the locations to find the coordinates? -- :  "))
+                df = pd.read_excel(file_name, sheet_name=worksheet-1)
+            elif
+            else:
+                print("Workbook empty, Provide worksheet to work on!")
+                quit()
+
+            print(df)
+
+            df["address"] = df[ps_name] + " " + df[district]
+            df["location"] = df["address"].apply(arc.geocode)
+            df["Latitude"] = df["location"].apply(lambda x : x.latitude if x != None else None)
+            df["Longitude"] = df["location"].apply(lambda x : x.longitude if x != None else None)
+            
+            df.to_excel("trial_test_done.xlsx", sheet_name="code test")
 
 
 
