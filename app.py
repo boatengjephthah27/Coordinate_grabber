@@ -14,20 +14,22 @@ for columns in logo:
 # Creating a function to load just a single coordinate
 
 def find_coordinate():
-    address = input("What is the location? -- :  ")
+    address = input("\nWhat is the location? -- :  ")
     arc = ArcGIS()
     location = arc.geocode(address)
-    loc = "\nThis is the most closest location to your input \nIs this the right location?\n\n" + str(location) + "\n\nYes / No --:  "
-    yn = input().lower()
+    loc = "\nThis is the location found per your input. \nIs this the right location?\n\n" + str(location) + "\n\nYes / No --:  "
     for columns in loc:
         print(columns, end="")
-        t.sleep(0.7)
+        t.sleep(0.05)
+    yn = input().lower()
     if yn == "yes":
         latitude = location.latitude
         longitude = location.longitude
         return f"\nLatitude : {latitude}\nLongitude : {longitude}\n"
     elif yn == "no":
-        find_coordinate()
+        os.sys("clear")
+        print(graphics.logo)
+        print(find_coordinate())
     else:
         print("Wrong choice!\nTry Again!")
     
@@ -42,49 +44,54 @@ def find_bulk_coordinates():
 
     # Checking if file exists or not
     if not os.path.exists(file_name):
-        print("\nFile does not exist! \nCheck file path well!\n\n")
+        print("\nFile does not exist! \nCheck file path well and don't forget the file type extension!\n\n")
 
     else:
         # Opening and reading the file
         # with pd.read_excel(file_name, sheet_name=0) as df:
 
-            # Gathering the necessary info for operation
-            sheet_no = int(input("How many sheets are in the workbook? -- :  "))
-            ps_name = input("What name have you stored the polling station names column? -- :  ")
-            region = input("Which region are you dealing with? -- :  ")
-            district = input("How have you stored the district column? -- :  ")
+        # Gathering the necessary info for operation
+        sheet_no = int(input("How many sheets are in the workbook? -- :  "))
+        ps_name = input("What name have you stored the polling station names column? -- :  ")
+        region = input("Which region are you dealing with? -- :  ")
+        district = input("How have you stored the district column? -- :  ")
 
 
-            # Giving a view of the file
-            view = "Giving you a view of the file......\n\n"
-            for columns in view:
-                print(columns, end="")
-                t.sleep(0.7)
+        # Putting up the conditions
 
-            print(df[:5])
+        if sheet_no == 1:
+            df = pd.read_excel(file_name, sheet_name=0)
+        elif sheet_no > 1:
+            worksheet = int(input("which sheet number has the locations to find the coordinates? -- :  "))
+            df = pd.read_excel(file_name, sheet_name=worksheet-1)
+        elif not int:
+            print("Invalid input. \nInput must be an integer!")
+            quit()
+        else:
+            print("Workbook empty, Provide worksheet to work on!")
+            quit()
 
+        # Giving a view of the file
+        view = "Giving you a view of the file......\n\n"
+        for columns in view:
+            print(columns, end="")
+            t.sleep(0.05)
 
-            # Putting up the conditions
+        print(df[:5])
 
-            if sheet_no == 1:
-                df = pd.read_excel(file_name, sheet_name=0)
-            elif sheet_no > 1:
-                worksheet = int(input("which sheet number has the locations to find the coordinates? -- :  "))
-                df = pd.read_excel(file_name, sheet_name=worksheet-1)
-            elif not int:
-                print("Invalid input. \nInput must be an integer!")
-            else:
-                print("Workbook empty, Provide worksheet to work on!")
-                quit()
+        loading = "Working on the file.\nIf the file has numerous rows it may take a while \nso relax and wait or you can continue with your other work and check later!\n\n"
+        for columns in loading:
+            print(columns, end="")
 
-            print(df)
+        df["address"] = df[ps_name] + " " + df[district] + " " + region
+        df["location"] = df["address"].apply(arc.geocode)
+        df["Latitude"] = df["location"].apply(lambda x : x.latitude if x != None else None)
+        df["Longitude"] = df["location"].apply(lambda x : x.longitude if x != None else None)
+        
+        df.to_excel("trial_test_done.xlsx", sheet_name="code test")
 
-            df["address"] = df[ps_name] + " " + df[district]
-            df["location"] = df["address"].apply(arc.geocode)
-            df["Latitude"] = df["location"].apply(lambda x : x.latitude if x != None else None)
-            df["Longitude"] = df["location"].apply(lambda x : x.longitude if x != None else None)
-            
-            df.to_excel("trial_test_done.xlsx", sheet_name="code test")
+        print("File successfully created!\nCheck your directory for the output!")
+
 
 
 
