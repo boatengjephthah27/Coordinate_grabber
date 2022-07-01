@@ -14,6 +14,9 @@ for columns in logo:
 # Creating a function to load just a single coordinate
 
 def find_coordinate():
+
+    # TODO 1 create a message to prompt on how to get accurate coordinate
+
     address = input("\nWhat is the location? -- :  ")
     arc = ArcGIS()
     location = arc.geocode(address)
@@ -37,6 +40,9 @@ def find_coordinate():
 
 # Creating a function to load coordinates from an excel file
 def find_bulk_coordinates():
+
+    # TODO 2 create a message to prompt on how to get accurate coordinate
+
     arc = ArcGIS()
 
     # Getting the file name
@@ -70,6 +76,8 @@ def find_bulk_coordinates():
         else:
             print("Workbook empty, Provide worksheet to work on!")
             quit()
+
+        # TODO 3 write conditions to check if column name does exist to prevent program from breaking
 
         # Giving a view of the file
         view = "Giving you a view of the file......\n\n"
