@@ -1,7 +1,7 @@
 import pandas as pd  
 from geopy.geocoders import ArcGIS
-import graphics 
-import os, sys, time as t
+import graphics, time as t
+from os import system as sys
 
 # printing the logo
 
@@ -30,11 +30,11 @@ def find_coordinate():
         longitude = location.longitude
         return f"\nLatitude : {latitude}\nLongitude : {longitude}\n"
     elif yn == "no":
-        os.sys("clear")
+        sys("clear")
         print(graphics.logo)
         print(find_coordinate())
     else:
-        print("Wrong choice!\nTry Again!")
+        print("\nWrong choice!\nTry Again!")
     
 
 
