@@ -43,6 +43,7 @@ def find_coordinate():
 
 # Creating a function to load coordinates from an excel file
 def find_bulk_coordinates():
+    print(graphics.logo)
 
     # TODO 2 create a message to prompt on how to get accurate coordinate
 
@@ -83,6 +84,9 @@ def find_bulk_coordinates():
         # TODO 3 write conditions to check if column name does exist to prevent program from breaking
 
         # Giving a view of the file
+        sys("clear")
+        print(graphics.logo)
+
         view = "Giving you a view of the file......\n\n"
         for columns in view:
             print(columns, end="")
@@ -90,9 +94,10 @@ def find_bulk_coordinates():
 
         print(df[:5])
 
-        loading = "Working on the file.\nIf the file has numerous rows it may take a while \nso relax and wait or you can continue with your other work and check later!\n\n"
+        loading = "\n\nWorking on the file.\nIf the file has numerous rows it may take a while \nso relax and wait or you can continue with your other works and check later!\n\n"
         for columns in loading:
             print(columns, end="")
+            t.sleep(0.05)
 
         df["address"] = df[ps_name] + " " + df[district] + " " + region
         df["location"] = df["address"].apply(arc.geocode)
@@ -112,8 +117,9 @@ def find_bulk_coordinates():
 
 user_choice = input("""
 Do you want to check for a single location or upload an excel file? :  
-1. Single location
-2. Upload an Excel file
+
+    1. Single location
+    2. Upload an Excel file
 
 --- :   """)
 
@@ -141,24 +147,14 @@ while True:
     .....................................................................................
 
 
-    Will skip to the next page in 15s....
-
-        """
+    \n"""
 
         for columns in message:
             print(columns, end="")
-            t.sleep(0.02)
-    
-        # wait_to_next = " "
-        # print(wait_to_next)
-        # t.sleep(15)
+            t.sleep(0.01)
 
-        # cont = input("Press Enter to continue...:  ")
-        if key.is_pressed('return'):
-            continue
-        # else:
-        #     None  
-
+        cont = input("Press Enter to continue...:  ")
+        
         sys("clear")
 
         print(find_coordinate())
@@ -189,30 +185,27 @@ while True:
                                        IMPORTANT!
 
         Make sure you check column names well!
-        if it gives you an error of { no column named "__input-column-name_" }, 
-        check the file well you might have added a space after typing the name or before 
+        If it gives you an error of { no column named "__input-column-name_" }, 
+        check the excel file well you might have added a space after typing the name or before 
         it. Best to clear and retype it.
+
+        Also, for files with first rows as a general heading, it is best to delete that row
+        and let the file start with the column names.
 
         If it has more rows, it will take significant amount of time to complete the
         process. So you can run at the back and continue with your work.
         
     .....................................................................................
 
-
-    Will skip to the next page in 1min....
-
-        """
+        \n"""
 
         for columns in message:
             print(columns, end="")
-            t.sleep(0.02)
+            t.sleep(0.01)
 
-        wait_to_next = " "
-        print(wait_to_next)
-        t.sleep(60)
+        cont = input("Press Enter to continue...:  ")
+
         sys("clear")
-
-
 
         find_bulk_coordinates()
         break
