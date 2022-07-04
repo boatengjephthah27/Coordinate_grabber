@@ -1,6 +1,6 @@
 import pandas as pd  
 from geopy.geocoders import ArcGIS
-import graphics, time as t
+import graphics, time as t, os
 from os import system as sys
 
 # printing the logo
@@ -13,18 +13,18 @@ for columns in logo:
 
 # Creating a function to load just a single coordinate
 
-def find_coordinate():
-
-    # TODO 1 create a message to prompt on how to get accurate coordinate
+def find_coordinate(): 
 
     address = input("\nWhat is the location? -- :  ")
     arc = ArcGIS()
     location = arc.geocode(address)
     loc = "\nThis is the location found per your input. \nIs this the right location?\n\n" + str(location) + "\n\nYes / No --:  "
+    
     for columns in loc:
         print(columns, end="")
         t.sleep(0.05)
     yn = input().lower()
+
     if yn == "yes":
         latitude = location.latitude
         longitude = location.longitude
@@ -46,11 +46,11 @@ def find_bulk_coordinates():
     arc = ArcGIS()
 
     # Getting the file name
-    file_name = input("What is the path of the file? -- :  ")
+    file_name = input("\nWhat is the path of the file? -- :  ")
 
     # Checking if file exists or not
     if not os.path.exists(file_name):
-        print("\nFile does not exist! \nCheck file path well and don't forget the file type extension!\n\n")
+        print("\nFile does not exist! \nCheck file path well and don't forget the file type extension (_.xlsx)!\n\n")
 
     else:
         # Opening and reading the file
@@ -117,6 +117,32 @@ Do you want to check for a single location or upload an excel file? :
 
 while True:
     if user_choice == "1":
+
+        sys("clear")
+
+        # TODO 1 create a message to prompt on how to get accurate coordinate
+        message = """
+
+    .....................................................................................
+
+                                \u26A0 NOTE BEFORE:
+
+        To get the right location and coordinate or to enchance its accuracy,
+        It is best you provide all the neccessary information you may have concerning
+        the location you want.
+
+        For example:
+        { Region, District, Country, City, Zip - if foreign }
+        
+    .....................................................................................
+
+
+        """
+
+        for columns in message:
+            print(columns, end="")
+            t.sleep(0.02)
+
         print(find_coordinate())
         break
 
