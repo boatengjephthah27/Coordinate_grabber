@@ -1,4 +1,3 @@
-from aem import con
 import pandas as pd  
 from geopy.geocoders import ArcGIS
 import graphics, time as t, os
@@ -150,15 +149,71 @@ while True:
             print(columns, end="")
             t.sleep(0.02)
     
-        wait_to_next = " "
-        print(wait_to_next)
-        t.sleep(15)
+        # wait_to_next = " "
+        # print(wait_to_next)
+        # t.sleep(15)
+
+        # cont = input("Press Enter to continue...:  ")
+        if key.is_pressed('return'):
+            continue
+        # else:
+        #     None  
+
         sys("clear")
 
         print(find_coordinate())
         break
 
     elif user_choice == "2":
+
+        sys("clear")
+
+        # TODO 1 create a message to prompt on how to get accurate coordinate
+        message = """
+
+    .....................................................................................
+
+                                \u26A0 NOTE BEFORE:
+
+        This code was written with a specific file sample arrangemet in mind.
+        Hence the columns align to that of the file and that is what is used.
+        Changes will be made to make it better to work with different arrangements.
+
+        If the columns are more than 1000rows, It is best suggested to break them 
+        into files of 1000rows or any fit but below 1000 to avoid the API from breaking as
+        limitations get put on it when run multiple times continually.
+
+        Future updates will be made to cover such files and codes will be written to break
+        them up and arrange them.
+
+                                       IMPORTANT!
+
+        Make sure you check column names well!
+        if it gives you an error of { no column named "__input-column-name_" }, 
+        check the file well you might have added a space after typing the name or before 
+        it. Best to clear and retype it.
+
+        If it has more rows, it will take significant amount of time to complete the
+        process. So you can run at the back and continue with your work.
+        
+    .....................................................................................
+
+
+    Will skip to the next page in 1min....
+
+        """
+
+        for columns in message:
+            print(columns, end="")
+            t.sleep(0.02)
+
+        wait_to_next = " "
+        print(wait_to_next)
+        t.sleep(60)
+        sys("clear")
+
+
+
         find_bulk_coordinates()
         break
 
