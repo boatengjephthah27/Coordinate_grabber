@@ -1,3 +1,4 @@
+from aem import con
 import pandas as pd  
 from geopy.geocoders import ArcGIS
 import graphics, time as t, os
@@ -5,20 +6,23 @@ from os import system as sys
 
 # printing the logo
 
+sys("clear")
+
 logo = graphics.logo
 for columns in logo:
     print(columns, end='')
-    t.sleep(0.003)
+    t.sleep(0.001)
 
 
 # Creating a function to load just a single coordinate
 
 def find_coordinate(): 
+    print(graphics.logo)
 
     address = input("\nWhat is the location? -- :  ")
     arc = ArcGIS()
     location = arc.geocode(address)
-    loc = "\nThis is the location found per your input. \nIs this the right location?\n\n" + str(location) + "\n\nYes / No --:  "
+    loc = "\nThis is the location found per your input. \n\n\t\t__" + str(location) +"__" + "\n\nIs this the right location? Yes / No --:  "
     
     for columns in loc:
         print(columns, end="")
@@ -116,6 +120,7 @@ Do you want to check for a single location or upload an excel file? :
 
 
 while True:
+    
     if user_choice == "1":
 
         sys("clear")
@@ -137,11 +142,18 @@ while True:
     .....................................................................................
 
 
+    Will skip to the next page in 15s....
+
         """
 
         for columns in message:
             print(columns, end="")
             t.sleep(0.02)
+    
+        wait_to_next = " "
+        print(wait_to_next)
+        t.sleep(15)
+        sys("clear")
 
         print(find_coordinate())
         break
@@ -151,8 +163,9 @@ while True:
         break
 
     else:
-        print("Option not part of the given, Try again!")
-        continue
+        print("\n\nOption not part of the given, Try again!\n\n")
+        break
+        
 
 
 
