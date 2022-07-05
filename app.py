@@ -103,8 +103,11 @@ def find_bulk_coordinates():
         df["location"] = df["address"].apply(arc.geocode)
         df["Latitude"] = df["location"].apply(lambda x : x.latitude if x != None else None)
         df["Longitude"] = df["location"].apply(lambda x : x.longitude if x != None else None)
+
+        book_name = input("What name should the file be stored with? --:  ")
+        sheet_name = input("\n\nWhat name should be given to the sheet? --:  ")
         
-        df.to_excel("trial_test_done.xlsx", sheet_name="code test")
+        df.to_excel(f"{book_name}.xlsx", sheet_name=sheet_name)
 
         print("\n\nFile successfully created!\nCheck your directory for the output!\n\n")
 
