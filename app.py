@@ -92,7 +92,7 @@ def find_bulk_coordinates():
             print(columns, end="")
             t.sleep(0.05)
 
-        print(df[:5])
+        print(df.head(5))
 
         loading = "\n\nWorking on the file.\nIf the file has numerous rows it may take a while \nso relax and wait or you can continue with your other works and check later!\n\n"
         for columns in loading:
@@ -106,7 +106,7 @@ def find_bulk_coordinates():
         
         df.to_excel("trial_test_done.xlsx", sheet_name="code test")
 
-        print("File successfully created!\nCheck your directory for the output!")
+        print("\n\nFile successfully created!\nCheck your directory for the output!\n\n")
 
 
 
