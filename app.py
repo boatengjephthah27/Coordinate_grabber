@@ -3,6 +3,9 @@ from geopy.geocoders import ArcGIS
 import graphics, time as t, os
 from os import system as sys
 
+# TODO 1 create a UI app for it using tkinter, kivy
+
+
 # printing the logo
 
 sys("clear")
@@ -45,8 +48,6 @@ def find_coordinate():
 def find_bulk_coordinates():
     print(graphics.logo)
 
-    # TODO 2 create a message to prompt on how to get accurate coordinate
-
     arc = ArcGIS()
 
     # Getting the file name
@@ -81,7 +82,8 @@ def find_bulk_coordinates():
             print("Workbook empty, Provide worksheet to work on!")
             quit()
 
-        # TODO 3 write conditions to check if column name does exist to prevent program from breaking
+        # TODO 1 write conditions to check if column name does exist to prevent program from breaking
+        # TODO 2 write an input to ask of how many columns exists in the file and change the codes to match the number of columns the user wants to add. 
 
         # Giving a view of the file
         sys("clear")
@@ -133,7 +135,6 @@ while True:
 
         sys("clear")
 
-        # TODO 1 create a message to prompt on how to get accurate coordinate
         message = """
 
     .....................................................................................
@@ -167,7 +168,7 @@ while True:
 
         sys("clear")
 
-        # TODO 1 create a message to prompt on how to get accurate coordinate
+
         message = """
 
     .....................................................................................
