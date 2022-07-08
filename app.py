@@ -4,11 +4,12 @@ import graphics, time as t, os
 from os import system as sys
 
 # TODO 1 create a UI app for it using tkinter, kivy
+# TODO 2 if doing for a specific region, define the upper and lower boundary limits of the longs and lats so as to not pick coordinates from those outside the defined boundaries.
 
 
 # printing the logo
 
-sys("clear")
+print(sys("clear"))
 
 logo = graphics.logo
 for columns in logo:
@@ -24,7 +25,7 @@ def find_coordinate():
     address = input("\nWhat is the location? -- :  ")
     arc = ArcGIS()
     location = arc.geocode(address)
-    loc = "\nThis is the location found per your input. \n\n\t\t__" + str(location) +"__" + "\n\nIs this the right location? Yes / No --:  "
+    loc = "\nThis is the location found per your input. \n\n\t\t__ " + str(location) +" __" + "\n\nIs this the right location? Yes / No --:  "
     
     for columns in loc:
         print(columns, end="")
@@ -40,7 +41,9 @@ def find_coordinate():
         print(graphics.logo)
         print(find_coordinate())
     else:
-        print("\nWrong choice!\nTry Again!")
+        print("\nWrong choice!\nTry Again!\n")
+        
+
     
 
 
@@ -82,8 +85,8 @@ def find_bulk_coordinates():
             print("Workbook empty, Provide worksheet to work on!")
             quit()
 
-        # TODO 1 write conditions to check if column name does exist to prevent program from breaking
-        # TODO 2 write an input to ask of how many columns exists in the file and change the codes to match the number of columns the user wants to add. 
+        # TODO 3 write conditions to check if column name does exist to prevent program from breaking
+        # TODO 4 write an input to ask of how many columns exists in the file and change the codes to match the number of columns the user wants to add. 
 
         # Giving a view of the file
         sys("clear")
