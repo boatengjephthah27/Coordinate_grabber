@@ -9,7 +9,7 @@ from os import system as sys
 
 # printing the logo
 
-print(sys("clear"))
+sys("clear")
 
 logo = graphics.logo
 for columns in logo:
@@ -38,8 +38,7 @@ def find_coordinate():
         return f"\nLatitude : {latitude}\nLongitude : {longitude}\n"
     elif yn == "no":
         sys("clear")
-        print(graphics.logo)
-        print(find_coordinate())
+        return find_coordinate()
     else:
         print("\nWrong choice!\nTry Again!\n")
         
@@ -121,18 +120,20 @@ def find_bulk_coordinates():
 
 
 
-# The opening Message for user to make a choice on what they want to do
-
-user_choice = input("""
-Do you want to check for a single location or upload an excel file? :  
-
-    1. Single location
-    2. Upload an Excel file
-
---- :   """)
 
 
-while True:
+def my_app():
+
+    # The opening Message for user to make a choice on what they want to do
+
+    user_choice = input("""
+    Do you want to check for a single location or upload an excel file? :  
+
+        1. Single location
+        2. Upload an Excel file
+
+    --- :   """)
+
     
     if user_choice == "1":
 
@@ -150,7 +151,22 @@ while True:
 
         For example:
         { Region, District, Country, City, Zip - if foreign }
+
+        For example;
         
+        Searching for Kumasi Melcom will output - {Melcom}
+        Which is same for searching for Accra Melcom
+
+        Though both giving Melcom, by specifying the city it points to that within the 
+        specified city, so 
+
+        Kumasi Melcom   --  {Melcom}    --    Latitude : 6.69246000000004
+                                              Longitude : -1.6220999999999322 
+        
+        Accra Melcom    --  {Melcom}    --    Latitude : 5.559870000000046
+                                              Longitude : -0.2589899999999261
+
+
     .....................................................................................
 
 
@@ -158,14 +174,14 @@ while True:
 
         for columns in message:
             print(columns, end="")
-            t.sleep(0.01)
+            t.sleep(0.009)
 
         cont = input("Press Enter to continue...:  ")
         
         sys("clear")
 
         print(find_coordinate())
-        break
+        
 
     elif user_choice == "2":
 
@@ -208,23 +224,27 @@ while True:
 
         for columns in message:
             print(columns, end="")
-            t.sleep(0.01)
+            t.sleep(0.009)
 
         cont = input("Press Enter to continue...:  ")
 
         sys("clear")
 
         find_bulk_coordinates()
-        break
+        
 
     else:
         print("\n\nOption not part of the given, Try again!\n\n")
-        break
+        t.sleep(4)
+        sys("clear")
+        print(graphics.logo)
+        return my_app()
+        
         
 
 
 
 
-
+my_app()
 
 
