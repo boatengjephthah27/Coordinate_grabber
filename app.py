@@ -64,7 +64,7 @@ def find_bulk_coordinates():
         # with pd.read_excel(file_name, sheet_name=0) as df:
 
         # Gathering the necessary info for operation
-        sheet_no = int(input("How many sheets are in the workbook? -- :  "))
+        sheet_no = int(input("Which sheet in the workbook has do you want to work on? -- :  "))
         ps_name = input("What name have you stored the polling station names column? -- :  ")
         region = input("Which region are you dealing with? -- :  ")
         district = input("How have you stored the district column? -- :  ")
